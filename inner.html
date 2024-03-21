@@ -4,17 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&family=Josefin+Slab:wght@100&display=swap" rel="stylesheet">
     <title>Pomodoro</title>
 </head>
 <body>
     <section>
-        <div id="tempo"> 
-            
-            <button></button><!--Btn do Timer-->
-
+        <div id="tempo">
+            <div id="circuloCarregamento"></div>
+            <!--Timer via JS-->
+            <h2 id="time">25:00</h2>
+            <!--altera texto via JS-->
+            <p id="textMode">Modo de Trabalho</p>
+            <!--altera imagem via JS-->
+            <img id="iconMode" class="icon" src="assets/modo-trabalho.png" alt="">
+            <div class="btnAction">
+                <!--Btn do Timer-->
+                <button id="btnPausa" onclick="actionPomodoro(0)"><img src="assets/btn-pausa.png" alt=""></button>
+                <!--Btn do Timer-->
+                <button id="btnInicia" class="active" onclick="actionPomodoro(1)"><img src="assets/btn-iniciar.png" alt=""></button>
+            </div>
+            <p id="pomodoroActionStatus">Iniciar</p>
         </div>
-        <div id="identificacoes">
-
+        <div id="descricao">
+            <div class="cardsBg" id="totalHoras">
+                <div class="titulo">
+                    <div class="retangulo"></div>
+                    <h2>Total de horas Modo de Trabalho</h2>
+                </div>
+                <!--soma total de pomodoro-->
+                <p><span id="horas">1</span>h <span id="minutos">30</span>m</p>
+            </div>
+            <div id="alongamento">
+                <div class="cardsBg" id="alongFeitos">
+                    <div class="titulo">
+                        <div class="retangulo"></div>
+                        <h2>Alongamentos Feitos</h2>
+                    </div>
+                    <div class="rolagemCustom">
+                        <!--Lista de alongamentos feitos (localStorage) inseridas via JS-->
+                        <div class="cardsAlong">
+                            <!--name alongamento API-->
+                            <h2>Alongamento 1</h2>
+                        </div> 
+                    </div>
+                </div>
+                <div class="cardsBg" id="alongAtual">
+                    <div class="titulo">
+                        <div class="retangulo"></div>
+                        <h2>Alongamentos Atual</h2>
+                    </div>
+                    <div class="rolagemCustom">
+                        <!--Alongamento atual inseridas via JS-->
+                        <div class="cardsAlong">
+                            <!--name alongamento API-->
+                            <h2>Alongamento 2</h2>
+                            <!--descrição API-->
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, qui at magni facere sunt officia quas obcaecati suscipit deleniti assumenda blanditiis aut accusamus consequatur. Accusamus laboriosam ea excepturi rerum. Quod!Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, qui at magni facere sunt officia quas obcaecati suscipit deleniti assumenda blanditiis aut accusamus consequatur. Accusamus laboriosam ea excepturi rerum. Quod!Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, qui at magni facere sunt officia quas obcaecati suscipit deleniti assumenda blanditiis aut accusamus consequatur. Accusamus laboriosam ea excepturi rerum. Quod!Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, qui at magni facere sunt officia quas obcaecati suscipit deleniti assumenda blanditiis aut accusamus consequatur. Accusamus laboriosam ea excepturi rerum. Quod!</p>
+                            <a id="btnAlong">Finalizar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     
