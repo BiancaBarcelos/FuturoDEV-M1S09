@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&family=Josefin+Slab:wght@100&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&family=Josefin+Slab:wght@100&display=swap"
+        rel="stylesheet">
     <title>Pomodoro</title>
 </head>
+
 <body>
     <section>
         <div id="tempo">
             <div id="circuloCarregamento"></div>
             <!--Timer via JS-->
-            <h2 id="time">25:00</h2>
+            <h2 id="time"></h2>
             <!--altera texto via JS-->
             <p id="textMode">Modo de Trabalho</p>
             <!--altera imagem via JS-->
@@ -23,7 +27,8 @@
                 <!--Btn do Timer-->
                 <button id="btnPausa" onclick="actionPomodoro(0)"><img src="assets/btn-pausa.png" alt=""></button>
                 <!--Btn do Timer-->
-                <button id="btnInicia" class="active" onclick="actionPomodoro(1)"><img src="assets/btn-iniciar.png" alt=""></button>
+                <button id="btnInicia" class="active" onclick="actionPomodoro(1)"><img src="assets/btn-iniciar.png"
+                        alt=""></button>
             </div>
             <p id="pomodoroActionStatus">Iniciar</p>
         </div>
@@ -47,7 +52,7 @@
                         <div class="cardsAlong">
                             <!--name alongamento API-->
                             <h2>Alongamento 1</h2>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="cardsBg" id="alongAtual">
@@ -61,7 +66,17 @@
                             <!--name alongamento API-->
                             <h2>Alongamento 2</h2>
                             <!--descrição API-->
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, qui at magni facere sunt officia quas obcaecati suscipit deleniti assumenda blanditiis aut accusamus consequatur. Accusamus laboriosam ea excepturi rerum. Quod!Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, qui at magni facere sunt officia quas obcaecati suscipit deleniti assumenda blanditiis aut accusamus consequatur. Accusamus laboriosam ea excepturi rerum. Quod!Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, qui at magni facere sunt officia quas obcaecati suscipit deleniti assumenda blanditiis aut accusamus consequatur. Accusamus laboriosam ea excepturi rerum. Quod!Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, qui at magni facere sunt officia quas obcaecati suscipit deleniti assumenda blanditiis aut accusamus consequatur. Accusamus laboriosam ea excepturi rerum. Quod!</p>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, qui at magni facere sunt
+                                officia quas obcaecati suscipit deleniti assumenda blanditiis aut accusamus consequatur.
+                                Accusamus laboriosam ea excepturi rerum. Quod!Lorem, ipsum dolor sit amet consectetur
+                                adipisicing elit. Sit, qui at magni facere sunt officia quas obcaecati suscipit deleniti
+                                assumenda blanditiis aut accusamus consequatur. Accusamus laboriosam ea excepturi rerum.
+                                Quod!Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, qui at magni facere
+                                sunt officia quas obcaecati suscipit deleniti assumenda blanditiis aut accusamus
+                                consequatur. Accusamus laboriosam ea excepturi rerum. Quod!Lorem, ipsum dolor sit amet
+                                consectetur adipisicing elit. Sit, qui at magni facere sunt officia quas obcaecati
+                                suscipit deleniti assumenda blanditiis aut accusamus consequatur. Accusamus laboriosam
+                                ea excepturi rerum. Quod!</p>
                             <a id="btnAlong">Finalizar</a>
                         </div>
                     </div>
@@ -69,7 +84,8 @@
             </div>
         </div>
     </section>
-    
+
     <script src="scripts/script.js"></script>
 </body>
+
 </html>
