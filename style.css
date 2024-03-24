@@ -47,11 +47,33 @@ section {
         width: 66%;
         height: 100%;
         & #circuloCarregamento {
-            border: 1px solid var(--txt_principal);
+            border: 2px solid var(--txt_principal);
             border-radius: 50%;
-            background-color: var(--txt_principal);
             width: 250px;
             height: 250px;
+            overflow: hidden;
+            & #animacaoOnda {
+                height: 240px;
+                transform: translateY(100%);
+                position: relative;
+                & img{
+                    position: absolute;
+                }
+                & .onda-1 {
+                    transform: translate(0, -60px);
+                    animation: onda 2s linear infinite;
+                }
+                & .onda-2 {
+                    transform: translate(0, -60px);
+                    opacity: .7;
+                    animation: onda 3s linear infinite;
+                }
+                & .onda-3 {
+                    transform: translate(0, -60px);
+                    opacity: .5;
+                    animation: onda 5s linear infinite;
+                }
+            }
         }
         & #time {
             font-family: "Josefin Slab", serif;
@@ -161,5 +183,15 @@ section {
                 }
             }
         }
+    }
+}
+
+
+@keyframes onda {
+    from {
+        transform: translate(0, -120px);
+    }
+    to {
+        transform: translate(-50%, -120px);
     }
 }

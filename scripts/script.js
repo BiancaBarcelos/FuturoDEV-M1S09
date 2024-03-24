@@ -1,10 +1,13 @@
 let btnPausa = document.getElementById('btnPausa');
 let btnInicia = document.getElementById('btnInicia');
+let ondaDiv = document.getElementById('animacaoOnda');
 let actionText = document.getElementById('pomodoroActionStatus');
 let timeDisplay = document.getElementById('time');
 let timer;
-let minutes = 25;
-let seconds = 0;
+let maxMinutes = 25;
+let minutes = maxMinutes;
+let maxSeconds = 0;
+let seconds = maxSeconds;
 timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
 
 function actionPomodoro(action){
@@ -16,6 +19,12 @@ function actionPomodoro(action){
     }
 }
 
+function sobeOnda(min, sec){
+  let tempoTotal = ((min * 60 ) + sec);
+  let alturaTotal = (tempoTotal / (maxMinutes * 60 + maxSeconds)) * 100;
+
+  ondaDiv.setAttribute('style', 'transform:translateY('+alturaTotal+'%)');
+}
 
 function startTimer() {
   timer = setInterval(() => {
@@ -31,6 +40,7 @@ function startTimer() {
     } else {
       seconds--;
     }
+    sobeOnda(minutes, seconds);
     timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
   }, 1000);
 }
