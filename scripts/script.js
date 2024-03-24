@@ -20,6 +20,47 @@ let listaExercicios = []
 let exercicioAtual = 0
 let offset = 0
 
+function mudaLimiteTimer(){
+  countTimer ++;
+  if(countTimer == 8){
+    countTimer = 1;
+    maxMinutes = 0;
+    maxSeconds = 5;
+    minutes = maxMinutes;
+    seconds = maxSeconds;
+    timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
+    textMode.innerText = "Descanso Longo";
+    iconMode.setAttribute('src', './assets/descanso-longo.png');
+    actionPomodoro(0);
+    sobeOnda(minutes, seconds);
+    return;
+  }
+  if(countTimer % 2 != 0){
+    maxMinutes = 0;
+    maxSeconds = 1;
+    minutes = maxMinutes;
+    seconds = maxSeconds;
+    timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
+    textMode.innerText = "Descanso Curto";
+    iconMode.setAttribute('src', './assets/descanso-curto.png');
+    actionPomodoro(0);
+    sobeOnda(minutes, seconds);
+    return;
+  }
+  if(countTimer % 2 == 0){
+    maxMinutes = 0
+    maxSeconds = 2;
+    minutes = maxMinutes
+    seconds = maxSeconds;
+    timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
+    textMode.innerText = "Modo de Trabalho";
+    iconMode.setAttribute('src', './assets/modo-trabalho.png');
+    actionPomodoro(0);
+    sobeOnda(minutes, seconds);
+    return;
+  } 
+}
+
 function actionPomodoro(action){
     btnInicia.classList.toggle('active');
     btnPausa.classList.toggle('active');
@@ -44,15 +85,7 @@ function startTimer() {
         audio.play();
         alert("Tempo esgotado!");
         mostrarExercicio();
-        maxMinutes = 5;
-        maxSeconds = 0;
-        minutes = maxMinutes;
-        seconds = maxSeconds;
-        timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
-        textMode.innerText = "Descanso Curto";
-        iconMode.setAttribute('src', './assets/descanso-curto.png');
-        actionPomodoro(0);
-        sobeOnda(minutes, seconds);
+        mudaLimiteTimer();
         return;
       } else {
         minutes--;
