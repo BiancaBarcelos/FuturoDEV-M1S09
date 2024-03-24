@@ -3,6 +3,7 @@ let btnInicia = document.getElementById('btnInicia');
 let ondaDiv = document.getElementById('animacaoOnda');
 let actionText = document.getElementById('pomodoroActionStatus');
 let timeDisplay = document.getElementById('time');
+let audio = document.querySelector('audio');
 let horaSomaTotal = document.getElementById('horas');
 let minutoSomaTotal = document.getElementById('minutos');
 let textMode = document.getElementById('textMode');
@@ -40,6 +41,8 @@ function startTimer() {
     if(seconds == 0) {
       if(minutes == 0) {
         clearInterval(timer);
+        audio.play();
+        alert("Tempo esgotado!");
         mostrarExercicio();
         maxMinutes = 5;
         maxSeconds = 0;
