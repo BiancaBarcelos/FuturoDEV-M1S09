@@ -9,9 +9,9 @@ let textMode = document.getElementById('textMode');
 let iconMode = document.getElementById('iconMode');
 
 let timer;
-let maxMinutes = 0;
+let maxMinutes = 25;
 let minutes = maxMinutes;
-let maxSeconds = 2;
+let maxSeconds = 0;
 let seconds = maxSeconds;
 timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
 
