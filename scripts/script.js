@@ -83,8 +83,8 @@ const loadUrl =  async () =>{
     const url = `https://api.api-ninjas.com/v1/exercises?type=stretching&offset=${offset}`;
     try {
         const response = await fetch(url, {
-            method: 'GET',
-            headers: {'X-Api-Key' : 'Your ApiKey'}
+          method: "GET",
+          headers: { "X-Api-Key": "Your-API-Key" },
         });
         const data = await response.json();
         
@@ -118,6 +118,16 @@ function mostrarExercicio() {
 
   botaoFinalizarAlong.addEventListener("click", () => {
 
+    const listaAlongAtual = document.getElementById("alongAtual");
+    listaAlongAtual.innerHTML = "";
+
+    mostrarExercicio();
+    if (exercicioAtual === 9) {
+      offset = offset + 10;
+      exercicioAtual = 0;
+      return;
+    }
+    exercicioAtual++;
   })
 
   cardAlong.appendChild(botaoFinalizarAlong);
