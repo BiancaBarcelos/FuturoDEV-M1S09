@@ -83,7 +83,7 @@ const loadUrl = async () => {
   try {
     const response = await fetch(url, {
       method: "GET",
-      headers: { "X-Api-Key": "bEql+jDMSw0vBlk7B7rM4w==dLnB4j1y7534flqz" },
+      headers: { "X-Api-Key": "your API key" },
     });
     const data = await response.json();
 
