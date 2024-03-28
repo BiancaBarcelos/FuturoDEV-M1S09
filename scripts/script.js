@@ -96,9 +96,7 @@ const loadUrl = async () => {
 }
 
 
-
 function mostrarExercicio() {
-  
   const listaAlongAtual = document.getElementById('alongAtual');
   const divRolagemCustom = document.createElement('div');
   divRolagemCustom.classList.add('rolagemCustom');
@@ -106,104 +104,121 @@ function mostrarExercicio() {
   const cardAlong = document.createElement('div');
   cardAlong.classList.add('cardsAlong');
   divRolagemCustom.appendChild(cardAlong);
-  let nomeAlong = document.createElement('h2');
-  nomeAlong.innerText = listaExercicios[exercicioAtual].name;
-  let pAlong = document.createElement('p');
-  pAlong.innerText = listaExercicios[exercicioAtual].instructions;
-  cardAlong.appendChild(nomeAlong);
-  cardAlong.appendChild(pAlong);
-  const botaoFinalizarAlong = document.createElement('a');
-  botaoFinalizarAlong.id = "btnAlong";
-  botaoFinalizarAlong.innerText = "Finalizar";
 
+  // Verifica se o exercício atual já foi concluído
+  let exercicioConcluido = isExercicioConcluido(listaExercicios[exercicioAtual].name);
 
+  //Se o exercício não foi concluído, cria os elementos HTML para exibir o nome e as instruções do exercício,
+  //bem como um botão para marcar o exercício como concluído 
+  if (!exercicioConcluido) {
+    let nomeAlong = document.createElement('h2');
+    nomeAlong.innerText = listaExercicios[exercicioAtual].name;
+    let pAlong = document.createElement('p');
+    pAlong.innerText = listaExercicios[exercicioAtual].instructions;
+    cardAlong.appendChild(nomeAlong);
+    cardAlong.appendChild(pAlong);
 
-  botaoFinalizarAlong.addEventListener("click", () => {
-    mostrarExercicioConcluido();
-    divRolagemCustom.removeChild(cardAlong);//
-    listaAlongAtual.removeChild(divRolagemCustom); //remove exercicio atual
-    if (exercicioAtual === 9) {
+    const botaoFinalizarAlong = document.createElement('a');
+    botaoFinalizarAlong.id = "btnAlong";
+    botaoFinalizarAlong.innerText = "Finalizar";
+
+    botaoFinalizarAlong.addEventListener("click", () => {
+      mostrarExercicioConcluido();
+      divRolagemCustom.removeChild(cardAlong);
+      listaAlongAtual.removeChild(divRolagemCustom);
+      // Incrementa o índice do exercício atual
+      exercicioAtual++;
+
+      // Verifica se atingiu o final da lista de exercícios
+      if (exercicioAtual === listaExercicios.length) {
+        offset = offset + 10;
+        exercicioAtual = 0;
+        localStorage.setItem("pagina", offset);
+        loadUrl();
+      } else {
+        // Armazena o índice do último exercício concluído no localStorage
+        localStorage.setItem("ultimoIndiceConcluido", exercicioAtual);
+      }
+    });
+
+    cardAlong.appendChild(botaoFinalizarAlong);
+    listaAlongAtual.appendChild(divRolagemCustom);
+  } else {
+    // Se o exercício já foi concluído, avança para o próximo exercício
+    exercicioAtual++;
+    if (exercicioAtual === listaExercicios.length) {
       offset = offset + 10;
       exercicioAtual = 0;
       localStorage.setItem("pagina", offset);
       loadUrl();
-      return;
     }
-
-    exercicioAtual++;
-    console.log(exercicioAtual)
-  })
-
-  cardAlong.appendChild(botaoFinalizarAlong);
-
-  listaAlongAtual.appendChild(divRolagemCustom);
+    mostrarExercicio(); // Chama recursivamente para exibir o próximo exercício disponível
+  }
+}
 
 
+//Esta função recebe o nome de um exercício como parâmetro e verifica se esse exercício está presente 
+//na lista de exercícios concluídos armazenados no localStorage
+function isExercicioConcluido(nomeExercicio) {
+  // verifica se o nome do exercício está presente na lista de exercícios concluídos e retorna
+  // verdadeiro se estiver, indicando que o exercício foi concluído anteriormente, e falso caso contrário
+  if (localStorage.ExerciciosConcluidos) {
+    //se a lista de exercícios concluídos existir no localStorage, ela é recuperada e convertida de volta para um array usando JSON.parse().
+    let arrayExercicioConcluido = JSON.parse(localStorage.getItem('ExerciciosConcluidos'));
+    //Em seguida, a função verifica se o nome do exercício está presente nesse array usando o método includes(). Se estiver presente, significa 
+    //que o exercício foi concluído anteriormente, e a função retorna true; caso contrário, retorna false.
+    return arrayExercicioConcluido.includes(nomeExercicio);
+  }
+  return false;
+}
 
-  // MATHEUS LOCAL STORAGE EXERCICIO 5
 
+function mostrarExercicioConcluido() {
   let arrayExercicioConcluido = [];
 
-  function mostrarExercicioConcluido() {
+  // Verifica se há algum exercício concluído armazenado no localStorage
+  if (localStorage.ExerciciosConcluidos) {
+    arrayExercicioConcluido = JSON.parse(localStorage.getItem('ExerciciosConcluidos'));
+  }
 
-    if (localStorage.ExerciciosConcluidos) {
-      arrayExercicioConcluido = JSON.parse(localStorage.getItem('ExerciciosConcluidos'));
-    } //verifica se existe o array 'ExerciciosConcluidos' dentro do localStorage para não sobrescrever os itens anteriores.
+  let novoItemExercicioConcluido = listaExercicios[exercicioAtual].name;
 
-    let novoItemExercicioConcluido = nomeAlong.textContent; //coletando o nome do exercico atual apos apertar botão FINALIZAR.
-    arrayExercicioConcluido.push(novoItemExercicioConcluido);//inserindo um novo dado dentro do array 'arrayExercicioConcluido'.
+  // Verifica se o novo item já está presente no array
+  if (!arrayExercicioConcluido.includes(novoItemExercicioConcluido)) {
+    arrayExercicioConcluido.push(novoItemExercicioConcluido);
 
-
-    // armazenando no localStorage
+    // Armazena o array atualizado de exercícios concluídos no localStorage
     localStorage.ExerciciosConcluidos = JSON.stringify(arrayExercicioConcluido);
 
-    // // insere no HTML os exercicios realizados
-    let resultCLASS = document.querySelector('.rolagemCustom');//acessa a classe
-    resultCLASS.innerHTML = "";//limpando a classe antes de adicionar outro item.
-    if (localStorage.ExerciciosRealizados) {
-      arrayExercicioConcluido = JSON.parse(localStorage.getItem('ExerciciosConcluidos'));
-    }
+    let resultCLASS = document.querySelector('.rolagemCustom');
+    resultCLASS.innerHTML = "";
 
-    //percorrendo todas as posições do array, para cada execução ira criar um novo item da lista
-    for (let i in arrayExercicioConcluido) {
+    // Atualiza a lista de exercícios concluídos exibida no HTML
+    for (let i = 0; i < arrayExercicioConcluido.length; i++) {
       let listItem = document.createElement('li');
       listItem.innerHTML = arrayExercicioConcluido[i];
       resultCLASS.appendChild(listItem);
-
-
     }
   }
 }
 
-/* pegar exercicios e paginação do locaStorage,mostra na tela os itens ja armazenados 
-e ja começa a busca de exercicio na pagina salva */
 function getStoraged() {
   const exerciciosArmazenados = JSON.parse(localStorage.getItem("ExerciciosConcluidos"));
-  if(exerciciosArmazenados) {
+  if (exerciciosArmazenados) {
     let resultCLASS = document.querySelector('.rolagemCustom');
     resultCLASS.innerHTML = "";
     for (let i in exerciciosArmazenados) {
       let listItem = document.createElement('li');
       listItem.innerHTML = exerciciosArmazenados[i];
       resultCLASS.appendChild(listItem);
-
-
     }
   }
   const paginaArmazenado = localStorage.getItem("pagina");
-  if(paginaArmazenado) {
+  if (paginaArmazenado) {
     console.log(paginaArmazenado);
     offset = paginaArmazenado;
   }
   loadUrl();
-
 }
+
 getStoraged();
-
-
-
-
-
-
-
-
