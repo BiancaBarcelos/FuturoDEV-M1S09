@@ -15,41 +15,46 @@ let minutes = maxMinutes;
 let maxSeconds = 0;
 let seconds = maxSeconds;
 timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
-
+let countTimer = 0;
 let listaExercicios = []
 let exercicioAtual = 0
 let offset = 0
 
 function mudaLimiteTimer(){
-  countTimer ++;
-  if(countTimer == 8){
-    countTimer = 1;
-    maxMinutes = 0;
-    maxSeconds = 5;
+  countTimer += 1;
+  console.log(countTimer);
+  if(countTimer == 9){
+    mudaTotalHoras();
+    countTimer = -1;
+    maxMinutes = 15;
+    maxSeconds = 0;
     minutes = maxMinutes;
     seconds = maxSeconds;
     timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
     textMode.innerText = "Descanso Longo";
     iconMode.setAttribute('src', './assets/descanso-longo.png');
+    mostrarExercicio();
     actionPomodoro(0);
     sobeOnda(minutes, seconds);
     return;
   }
   if(countTimer % 2 != 0){
-    maxMinutes = 0;
-    maxSeconds = 1;
+    mudaTotalHoras();
+    maxMinutes = 5;
+    maxSeconds = 0;
     minutes = maxMinutes;
     seconds = maxSeconds;
     timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
     textMode.innerText = "Descanso Curto";
     iconMode.setAttribute('src', './assets/descanso-curto.png');
+    mostrarExercicio();
     actionPomodoro(0);
     sobeOnda(minutes, seconds);
     return;
   }
   if(countTimer % 2 == 0){
-    maxMinutes = 0
-    maxSeconds = 2;
+    maxMinutes = 25;
+    maxSeconds = 0;
     minutes = maxMinutes
     seconds = maxSeconds;
     timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
@@ -82,9 +87,8 @@ function startTimer() {
     if(seconds == 0) {
       if(minutes == 0) {
         clearInterval(timer);
-        audio.play();
-        alert("Tempo esgotado!");
-        mostrarExercicio();
+        // audio.play();
+        // alert("Tempo esgotado!");
         mudaLimiteTimer();
         return;
       } else {
@@ -117,7 +121,7 @@ const loadUrl =  async () =>{
     try {
         const response = await fetch(url, {
             method: 'GET',
-            headers: {'X-Api-Key' : 'Your ApiKey'}
+            headers: {'X-Api-Key' : 'EYQZzSRiGRnLMYzBzK32HLEjadDCHQiigQHyatoz'}
         });
         const data = await response.json();
         
@@ -156,4 +160,19 @@ function mostrarExercicio() {
   cardAlong.appendChild(botaoFinalizarAlong);
 
   listaAlongAtual.appendChild(divRolagemCustom);
+}
+
+let minutosPassados = 0;
+let horasPassadas = 0;
+
+function mudaTotalHoras(){
+  const horas = document.getElementById('horas');
+  const minutos = document.getElementById('minutos');
+  minutosPassados += maxMinutes;
+  if(minutosPassados >= 60){
+    horasPassadas += 1;
+    minutosPassados = minutosPassados - 60;
+  }
+  horas.innerText = horasPassadas;
+  minutos.innerText = minutosPassados;
 }
