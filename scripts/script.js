@@ -23,11 +23,11 @@ let offset = 0
 function mudaLimiteTimer(){
   countTimer += 1;
   console.log(countTimer);
-  if(countTimer == 9){
+  if(countTimer == 7){
     mudaTotalHoras();
     countTimer = -1;
-    maxMinutes = 15;
-    maxSeconds = 0;
+    maxMinutes = 0;
+    maxSeconds = 1;
     minutes = maxMinutes;
     seconds = maxSeconds;
     timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
@@ -40,8 +40,8 @@ function mudaLimiteTimer(){
   }
   if(countTimer % 2 != 0){
     mudaTotalHoras();
-    maxMinutes = 5;
-    maxSeconds = 0;
+    maxMinutes = 0;
+    maxSeconds = 1;
     minutes = maxMinutes;
     seconds = maxSeconds;
     timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
@@ -53,8 +53,8 @@ function mudaLimiteTimer(){
     return;
   }
   if(countTimer % 2 == 0){
-    maxMinutes = 25;
-    maxSeconds = 0;
+    maxMinutes = 0;
+    maxSeconds = 2;
     minutes = maxMinutes
     seconds = maxSeconds;
     timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
@@ -122,7 +122,7 @@ const loadUrl = async () => {
   try {
     const response = await fetch(url, {
       method: "GET",
-      headers: { "X-Api-Key": "your API key" },
+      headers: { "X-Api-Key": "PJTc2go2bAkfUyPBDo4NsWmsTEcQdY5uNzPQdWkC" },
     });
     const data = await response.json();
 
