@@ -10,9 +10,9 @@ let textMode = document.getElementById('textMode');
 let iconMode = document.getElementById('iconMode');
 
 let timer;
-let maxMinutes = 0;
+let maxMinutes = 25;
 let minutes = maxMinutes;
-let maxSeconds = 2;
+let maxSeconds = 0;
 let seconds = maxSeconds;
 timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
 let countTimer = 0;
@@ -26,8 +26,8 @@ function mudaLimiteTimer(){
   if(countTimer == 7){
     mudaTotalHoras();
     countTimer = -1;
-    maxMinutes = 0;
-    maxSeconds = 1;
+    maxMinutes = 15;
+    maxSeconds = 0;
     minutes = maxMinutes;
     seconds = maxSeconds;
     timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
@@ -40,8 +40,8 @@ function mudaLimiteTimer(){
   }
   if(countTimer % 2 != 0){
     mudaTotalHoras();
-    maxMinutes = 0;
-    maxSeconds = 1;
+    maxMinutes = 5;
+    maxSeconds = 0;
     minutes = maxMinutes;
     seconds = maxSeconds;
     timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
@@ -53,8 +53,8 @@ function mudaLimiteTimer(){
     return;
   }
   if(countTimer % 2 == 0){
-    maxMinutes = 0;
-    maxSeconds = 2;
+    maxMinutes = 25;
+    maxSeconds = 0;
     minutes = maxMinutes
     seconds = maxSeconds;
     timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
@@ -88,7 +88,7 @@ function startTimer() {
     if (seconds == 0) {
       if (minutes == 0) {
         clearInterval(timer);
-        // audio.play();
+        audio.play();
         // alert("Tempo esgotado!");
         mudaLimiteTimer();
         return;
@@ -122,7 +122,7 @@ const loadUrl = async () => {
   try {
     const response = await fetch(url, {
       method: "GET",
-      headers: { "X-Api-Key": "your api key" },
+      headers: { "X-Api-Key": "agGPOPAzBlnSKiAjKsyXeBjidCrQu41Dni0w2pa2" },
     });
     const data = await response.json();
 
